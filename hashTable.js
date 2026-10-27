@@ -159,3 +159,13 @@ class HashTable {
         yield* this.entries();
     }
 }
+
+const students = new HashTable();
+
+students.set("Anna", 20);
+students.set("Aram", 22);
+students.set("Ani", 19);
+
+console.log(students.get("Anna")); // 20
+console.log(students.has("Aram")); // true
+console.log(students.getSize());   // 3
