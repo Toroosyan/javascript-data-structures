@@ -45,9 +45,7 @@ class HashTable {
         const index = this._hash(key);
 
         for (const entry of this.table[index]) {
-            if (entry[0] === key) {
-                return true;
-            }
+            if (entry[0] === key) return true;
         }
 
         return false;
@@ -57,9 +55,7 @@ class HashTable {
         const index = this._hash(key);
 
         for (const entry of this.table[index]) {
-            if (entry[0] === key) {
-                return entry[1];
-            }
+            if (entry[0] === key) return entry[1];
         }
 
         return undefined;
@@ -133,6 +129,7 @@ class HashTable {
         const oldTable = this.table;
 
         this.capacity = nextPrime(this.capacity * 2);
+
         this.table = Array.from(
             { length: this.capacity },
             () => []
@@ -160,6 +157,21 @@ class HashTable {
     }
 }
 
-console.log(students.get("Anna")); // 20
-console.log(students.has("Aram")); // true
-console.log(students.getSize());   // 3
+// Testing
+
+const students = new HashTable();
+
+students.set("Anna", 20);
+students.set("Aram", 22);
+students.set("Ani", 19);
+
+console.log(students.get("Anna"));    // 20
+console.log(students.has("Aram"));    // true
+console.log(students.getSize());      // 3
+
+console.log([...students.keys()]);    // [ "Aram", "Ani", "Anna"]
+console.log([...students.values()]);  // [22, 19, 20]
+console.log([...students.entries()]); //[['Aram',22],['Ani',19],['Anna',20 ]]
+
+console.log(students.delete("Aram")); // true
+console.log(students.getSize());      // 2
